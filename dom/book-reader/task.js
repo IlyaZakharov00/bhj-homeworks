@@ -1,18 +1,23 @@
-const small = document.querySelector(".font-size_small");
-const big = document.querySelector(".font-size_big");
-const book = document.querySelector(".book");
+const book = document.getElementById("book");
+const font_size = document.querySelectorAll(".font-size");
+const arr_font_size = Array.from(font_size);
 
-console.log(small);
-console.log(big);
+for (const button of arr_font_size) {
+  button.addEventListener("click", (event) => {
+    for (const button of arr_font_size) {
+      button.classList.remove("font-size_active");
+    }
 
-small.addEventListener("click", (element) => {
-  small.classList.toggle("font-size_active");
-  book.classList.toggle("book_fs-small");
-  element.preventDefault();
-});
+    book.classList.remove("font-size_small");
+    book.classList.remove("font-size_big");
+    event.target.classList.add("font-size_active");
 
-big.addEventListener("click", (element) => {
-  big.classList.toggle("font-size_active");
-  book.classList.toggle("book_fs-big");
-  element.preventDefault();
-});
+    if (event.target.classList.contains("font-size_small")) {
+      book.classList.add("font-size_small");
+    } else if (event.target.classList.contains("font-size_big")) {
+      book.classList.add("font-size_big");
+    }
+
+    event.preventDefault();
+  });
+}

@@ -1,24 +1,13 @@
-const reveal = document.querySelectorAll("div.reveal");
-
-console.log(reveal);
-
-for (let i = 0; i < reveal.length; i++) {
-  console.log(reveal[i].getBoundingClientRect());
-}
-
 function isVisible(element) {
+  const reveal = document.querySelectorAll(".reveal");
   for (let i = 0; i < reveal.length; i++) {
-    const { top, bottom } = element[i].getBoundingClientRect();
+    const { top, bottom } = reveal[i].getBoundingClientRect();
     if (bottom > 0 || top < window.innerHeight) {
-      element[i].classList.add("reveal_active");
-      console.log({ top, bottom });
+      reveal[i].classList.add("reveal_active");
     }
     if (bottom < 0 || top > window.innerHeight) {
-      element[i].classList.remove("reveal_active");
+      reveal[i].classList.remove("reveal_active");
     }
   }
 }
-
-setInterval(() => {
-  console.log(isVisible(reveal));
-}, 1000);
+window.addEventListener("scroll", isVisible);
