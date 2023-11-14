@@ -28,13 +28,6 @@ class Game {
       }
     });
 
-    countTimer = () => {
-      this.timer.textContent = this.wordElement.textContent.length;
-      this.timer.textContent--;
-      if (this.timer.textContent === 0) {
-        this.fail();
-      }
-    };
     /*
       TODO:
       Написать обработчик события, который откликается
@@ -44,7 +37,14 @@ class Game {
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
   }
-
+  countTimer = () => {
+    this.timer.textContent = this.wordElement.textContent.length;
+    this.timer.textContent--;
+    if (this.timer.textContent === 0) {
+      this.fail();
+    }
+    // setInterval(this.countTimer, 1000);
+  };
   success() {
     if (this.currentSymbol.classList.contains("symbol_current"))
       this.currentSymbol.classList.remove("symbol_current");
@@ -72,6 +72,8 @@ class Game {
   }
 
   setNewWord() {
+    this.countTimer();
+
     const word = this.getWord();
 
     this.renderWord(word);
