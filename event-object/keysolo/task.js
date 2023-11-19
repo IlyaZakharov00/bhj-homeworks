@@ -12,6 +12,8 @@ class Game {
   }
 
   reset() {
+    clearInterval(this.timerId);
+    this.timerId = null;
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
@@ -37,14 +39,17 @@ class Game {
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
   }
-  countTimer = () => {
+  startTimer() {
+    clearInterval(this.timerId);
     this.timer.textContent = this.wordElement.textContent.length;
-    this.timer.textContent--;
-    if (this.timer.textContent === 0) {
-      this.fail();
-    }
-    // setInterval(this.countTimer, 1000);
-  };
+    this.timerId = setInterval(() => {
+      this.timer.textContent--;
+      if (this.timer.textContent === "0") {
+        this.fail();
+      }
+    }, 1000);
+  }
+
   success() {
     if (this.currentSymbol.classList.contains("symbol_current"))
       this.currentSymbol.classList.remove("symbol_current");
@@ -72,11 +77,10 @@ class Game {
   }
 
   setNewWord() {
-    this.countTimer();
-
+    clearInterval(this.timerId);
     const word = this.getWord();
-
     this.renderWord(word);
+    this.startTimer();
   }
 
   getWord() {
