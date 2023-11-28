@@ -9,8 +9,5 @@ button.addEventListener("click", () => {
 
 editor.value = localStorage.getItem("text");
 editor.addEventListener("input", () => {
-  if (!storeText) {
-    const text = editor.value;
-    localStorage.setItem("text", text);
-  }
+  localStorage.setItem("text", (text = editor.value));
 });
