@@ -9,5 +9,5 @@ button.addEventListener("click", () => {
 
 editor.value = localStorage.getItem("text");
 editor.addEventListener("input", () => {
-  localStorage.setItem("text", (text = editor.value));
+  localStorage.setItem("text", editor.value);
 });
